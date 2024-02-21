@@ -1,0 +1,11 @@
+include dash_text_to_speech/dash_text_to_speech.min.js
+include dash_text_to_speech/dash_text_to_speech.min.js.map
+include dash_text_to_speech/async-*.js
+include dash_text_to_speech/async-*.js.map
+include dash_text_to_speech/*-shared.js
+include dash_text_to_speech/*-shared.js.map
+include dash_text_to_speech/metadata.json
+include dash_text_to_speech/package-info.json
+include README.md
+include LICENSE
+include package.json

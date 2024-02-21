@@ -1,0 +1,1 @@
+export const DashTextToSpeech = React.lazy(() => import(/* webpackChunkName: "DashTextToSpeech" */ './fragments/DashTextToSpeech.react'));
