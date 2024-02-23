@@ -1,15 +1,4 @@
 import React, {Component} from 'react';
-import IconButton from '@mui/material/IconButton';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
-import StopCircleIcon from '@mui/icons-material/StopCircle';
-
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-
 import PropTypes from 'prop-types';
 
 /**
@@ -50,8 +39,6 @@ export default class DashTextToSpeech extends Component {
         this.handlePitchChange = this.handlePitchChange.bind(this);
         this.handleRateChange = this.handleRateChange.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
-
-        //this.handleVolumeChange = this.handleVolumeChange.bind(this);
     }
 
     handlePitchChange = (e) => {
@@ -105,8 +92,7 @@ export default class DashTextToSpeech extends Component {
         this.setState({ paused: false });
     }
 
-    handleVoiceChange = (event) => {
-    console.log(event.target.value);
+    handleVoiceChange = (e) => {
         const voices = window.speechSynthesis.getVoices();
 
         this.state.voice = voices.find((v) => v.name === event.target.value);
@@ -136,39 +122,66 @@ export default class DashTextToSpeech extends Component {
         this.state.rate = rate;
         this.state.volume = volume;
 
-        //console.log(this.voices);
-        //console.log(this.props);
-        //console.log(this.state.voice.name);
+        console.log(this.voices);
+        console.log(this.props);
+        console.log(this.state);
 
         return (
     <div id={id}>
-
-      <FormControl fullWidth>
-        <InputLabel id="voice-label">Voice</InputLabel>
-        <Select
-          labelId="voice-select-label"
-          id="voice-select"
-          value={this.state.voice.name}
-          label="Voice"
-          onChange={this.handleVoiceChange}
-        >
+      <label>
+        Voice:
+        <select value={this.state.voice.name} onChange={this.handleVoiceChange}>
           {this.voices.map((v) => (
-            <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>
+            <option key={v.name} value={v.name}>
+              {v.name}
+            </option>
           ))}
-        </Select>
-      </FormControl>
+        </select>
+      </label>
 
-      <IconButton aria-label="play" size="large" onClick={this.handlePlay}>
-          {this.state.paused ? <AdjustIcon />: <PlayCircleIcon />}
-      </IconButton>
+      <br />
+      <label>
+        Pitch:
+        <input
+          type="range"
+          min="0.5"
+          max="2"
+          step="0.1"
+          value={this.props.pitch}
+          onChange={this.handlePitchChange}
+        />
+      </label>
 
-      <IconButton aria-label="pause" size="large" onClick={this.handlePause}>
-          <PauseCircleIcon />
-      </IconButton>
+      <br />
+      <label>
+        Speed:
+        <input
+          type="range"
+          min="0.5"
+          max="2"
+          step="0.1"
+          value={this.props.rate}
+          onChange={this.handleRateChange}
+        />
+      </label>
 
-      <IconButton aria-label="stop" size="large" onClick={this.handleStop}>
-          <StopCircleIcon />
-      </IconButton>
+      <br />
+      <label>
+        Volume:
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value={this.props.volume}
+          onChange={this.handleVolumeChange}
+        />
+      </label>
+
+      <button onClick={this.handlePlay}>{paused ? "Resume" : "Play"}</button>
+      <button onClick={this.handlePause}>Pause</button>
+      <button onClick={this.handleStop}>Stop</button>
+}
     </div>
         );
     }

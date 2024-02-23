@@ -1,5 +1,5 @@
 import dash_text_to_speech
-from dash import Dash, callback, html, Input, Output
+from dash import Dash, callback, html, Input, Output, State
 import dash_mantine_components as dmc
 import dash_bootstrap_components as dbc
 
@@ -11,18 +11,19 @@ app.layout = html.Div([
         text='You have entered my value',
         pitch=0.5,
         rate=1.0,
-        volume=0.3,
+        volume=0.7,
+        paused=False
     ),
     html.Div(
         children=[
             dbc.Label("Pitch"),
-            dmc.Slider(id='pitch_slider', min=0.5, max=2, step=0.1),
+            dmc.Slider(id='pitch_slider', min=0.5, max=2, step=0.1, value=0.7),
 
             dbc.Label("Rate"),
-            dmc.Slider(id='rate_slider', min=0.5, max=2, step=0.1),
+            dmc.Slider(id='rate_slider', min=0.5, max=2, step=0.1, value=1.0),
 
             dbc.Label("Volume"),
-            dmc.Slider(id='volume_slider', min=0.5, max=2, step=0.1),
+            dmc.Slider(id='volume_slider', min=0.5, max=2, step=0.1, value=0.7),
         ]
     ),
     html.Div(id='output')
